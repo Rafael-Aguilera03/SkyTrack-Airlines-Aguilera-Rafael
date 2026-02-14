@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AvionesController } from './aviones.controller';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AvionesService } from './aviones.service';
+import { AvionesController } from './aviones.controller';
+import { Avion, AvionSchema } from './schemas/avion.schema';
 
 @Module({
+  imports: [MongooseModule.forFeature([{ name: Avion.name, schema: AvionSchema }])],
   controllers: [AvionesController],
-  providers: [AvionesService]
+  providers: [AvionesService],
 })
 export class AvionesModule {}
