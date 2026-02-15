@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { VuelosModule } from './vuelos/vuelos.module';
-import { AvionesModule } from './aviones/aviones.module';
-import { TripulacionModule } from './tripulacion/tripulacion.module';
 import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuarios/usuario.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(process.env.MONGO_URI ?? 'mongodb://localhost:27017/skytrack'),
-    VuelosModule,
-    AvionesModule,
-    TripulacionModule,
+    ConfigModule.forRoot({
+      isGlobal: true, // variables disponibles en toda la app
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI')!,
+      }),
+    }),
     AuthModule,
+    UsuarioModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
