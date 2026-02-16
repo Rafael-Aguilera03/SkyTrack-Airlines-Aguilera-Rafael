@@ -1,0 +1,143 @@
+.usuarios-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.usuarios-container h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* Formulario */
+.usuarios-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.usuarios-form input,
+.usuarios-form select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.usuarios-form button {
+  padding: 0.6rem 1rem;
+  background: #27ae60;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.usuarios-form button:hover {
+  background: #219150;
+}
+
+/* Botón cancelar */
+.usuarios-form .btn-cancel {
+  background: #7f8c8d;
+}
+
+.usuarios-form .btn-cancel:hover {
+  background: #606060;
+}
+
+/* Tabla */
+.usuarios-table {
+  margin-top: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.usuarios-table th,
+.usuarios-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.usuarios-table th {
+  background: #2c3e50;
+  color: white;
+}
+
+.usuarios-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Botones de acciones */
+.btn-edit,
+.btn-delete {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: background 0.2s ease;
+}
+
+.btn-edit {
+  background: #3498db;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #2980b9;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+/* Responsive: tabla en formato cards */
+@media (max-width: 768px) {
+  .usuarios-table,
+  .usuarios-table thead,
+  .usuarios-table tbody,
+  .usuarios-table th,
+  .usuarios-table td,
+  .usuarios-table tr {
+    display: block;
+  }
+
+  .usuarios-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem;
+    background: white;
+  }
+
+  .usuarios-table td {
+    border: none;
+    text-align: left;
+    padding: 0.5rem;
+  }
+
+  .usuarios-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .usuarios-table th {
+    display: none;
+  }
+}

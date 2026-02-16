@@ -1,0 +1,109 @@
+.sidebar {
+  width: 220px;
+  background: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;  
+  min-height: 100vh;
+}
+
+.sidebar-title {
+  font-size: 1.4rem;
+  margin-bottom: 5rem;  
+  text-align: center;
+  font-weight: bold;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;             
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;        
+  color: white;
+  text-decoration: none; 
+  padding: 0.6rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+  font-weight: bold;
+}
+
+.sidebar-menu a:hover {
+  background: #34495e;   
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-user {
+  font-weight: bold;
+  color: #ecf0f1;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem;
+    min-height: auto; /* evita que ocupe toda la pantalla en móvil */
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .sidebar-footer {
+    margin-top: 0;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .sidebar-user {
+    display: none; /* ocultar nombre en móvil para ahorrar espacio */
+  }
+
+  .logout-btn {
+    padding: 0.3rem 0.6rem;   /* más compacto */
+    font-size: 0.8rem;        /* texto más chico */
+    width: auto;              /* no ocupa todo el ancho */
+    flex-shrink: 0;           /* evita que se estire y tape */
+    margin-left: auto;        /* lo empuja a la derecha */
+  }
+}

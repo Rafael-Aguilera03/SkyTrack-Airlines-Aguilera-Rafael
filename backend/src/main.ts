@@ -7,10 +7,16 @@ async function bootstrap() {
 
   // Activa validación global de DTOs
   app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, // elimina propiedades extra no definidas en el DTO
-    forbidNonWhitelisted: true, // lanza error si hay propiedades no permitidas
-    transform: true, // transforma payloads a la clase DTO
+    whitelist: true,
+    forbidNonWhitelisted: true,
+    transform: true,
   }));
+
+  // CORS para frontend
+  app.enableCors({
+    origin: 'http://localhost:5173', // dirección del frontend
+    credentials: true,
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }

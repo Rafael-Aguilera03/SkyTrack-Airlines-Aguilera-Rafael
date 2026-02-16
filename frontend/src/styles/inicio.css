@@ -1,0 +1,25 @@
+.inicio-container {
+  text-align: center;
+}
+
+.inicio-container h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.inicio-container p {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inicio-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .inicio-container p {
+    font-size: 0.95rem;
+  }
+}
