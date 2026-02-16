@@ -3,11 +3,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UsuarioModule } from './usuarios/usuario.module';
+import { AvionesModule } from './aviones/aviones.module';
+import { TripulacionModule } from './tripulacion/tripulacion.module';
+import { VuelosModule } from './vuelos/vuelos.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // variables disponibles en toda la app
+      isGlobal: true,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -18,6 +21,9 @@ import { UsuarioModule } from './usuarios/usuario.module';
     }),
     AuthModule,
     UsuarioModule,
+    AvionesModule,
+    TripulacionModule,
+    VuelosModule,
   ],
 })
 export class AppModule {}

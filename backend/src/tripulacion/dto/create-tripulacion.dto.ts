@@ -1,4 +1,4 @@
-import { IsString, IsIn } from 'class-validator';
+import { IsString, IsIn, IsBoolean, IsOptional } from 'class-validator';
 
 export class CreateTripulacionDto {
   @IsString()
@@ -6,4 +6,8 @@ export class CreateTripulacionDto {
 
   @IsIn(['piloto', 'copiloto', 'tripulante de cabina'])
   rol: string;
+
+  @IsOptional()
+  @IsBoolean()
+  activo?: boolean;
 }

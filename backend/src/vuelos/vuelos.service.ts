@@ -21,19 +21,35 @@ export class VuelosService {
     if (filters?.destino) query.destino = filters.destino;
     if (filters?.estado) query.estado = filters.estado;
 
-    return this.vueloModel.find(query).populate('avion').exec();
+    return this.vueloModel
+      .find(query)
+      .populate('avion')
+      .populate('tripulacion')
+      .exec();
   }
 
   async findOne(id: string): Promise<Vuelo | null> {
-    return this.vueloModel.findById(id).populate('avion').exec();
+    return this.vueloModel
+      .findById(id)
+      .populate('avion')
+      .populate('tripulacion')
+      .exec();
   }
 
   async update(id: string, dto: UpdateVueloDto): Promise<Vuelo | null> {
-    return this.vueloModel.findByIdAndUpdate(id, dto, { new: true }).populate('avion').exec();
+    return this.vueloModel
+      .findByIdAndUpdate(id, dto, { returnDocument: 'after' }) 
+      .populate('avion')
+      .populate('tripulacion')
+      .exec();
   }
 
   // Baja lógica: no borra, solo marca activo=false
   async remove(id: string): Promise<Vuelo | null> {
-    return this.vueloModel.findByIdAndUpdate(id, { activo: false }, { new: true }).exec();
+    return this.vueloModel
+      .findByIdAndUpdate(id, { activo: false }, { returnDocument: 'after' }) 
+      .populate('avion')
+      .populate('tripulacion')
+      .exec();
   }
 }

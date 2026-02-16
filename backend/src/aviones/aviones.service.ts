@@ -23,10 +23,18 @@ export class AvionesService {
   }
 
   async update(id: string, dto: UpdateAvionDto): Promise<Avion | null> {
-    return this.avionModel.findByIdAndUpdate(id, dto, { new: true }).exec();
+    return this.avionModel.findByIdAndUpdate(
+      id,
+      { $set: dto },
+      { returnDocument: 'after' }
+    ).exec();
   }
 
-  async remove(id: string): Promise<Avion | null> {
-    return this.avionModel.findByIdAndDelete(id).exec();
+  async remove(id: string): Promise<{ message: string } | null> {
+    const deleted = await this.avionModel.findByIdAndDelete(id).exec();
+    if (!deleted) {
+      return null;
+    }
+    return { message: `Avión con id ${id} eliminado correctamente` };
   }
 }
