@@ -52,4 +52,13 @@ export class VuelosService {
       .populate('tripulacion')
       .exec();
   }
+
+  // admin y operador pueden cambiar estado del vuelo
+  async updateEstado(id: string, estado: string): Promise<Vuelo | null> {
+    return this.vueloModel
+      .findByIdAndUpdate(id, { estado }, { returnDocument: 'after' })
+      .populate('avion')
+      .populate('tripulacion')
+      .exec();
+  }
 }
