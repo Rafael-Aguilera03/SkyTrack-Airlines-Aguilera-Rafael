@@ -1,0 +1,169 @@
+.aviones-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.aviones-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+/* Formularios */
+.aviones-form,
+.aviones-edit-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.aviones-form input,
+.aviones-edit-form input,
+.aviones-edit-form select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.aviones-form button,
+.aviones-edit-form button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #3498db;
+  color: white;
+  transition: background 0.3s;
+}
+
+.aviones-form button:hover,
+.aviones-edit-form button:hover {
+  background: #2980b9;
+}
+
+/* Tabla */
+.aviones-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.aviones-table th,
+.aviones-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.aviones-table th {
+  background: #2c3e50;
+  color: white;
+}
+
+.aviones-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Estados */
+.estado-disponible {
+  color: #27ae60; /* verde */
+  font-weight: bold;
+}
+
+.estado-en-vuelo {
+  color: #3498db; /* azul */
+  font-weight: bold;
+}
+
+.estado-en-mantenimiento {
+  color: #e67e22; /* naranja */
+  font-weight: bold;
+}
+
+/* Botones de acciones */
+.aviones-table button {
+  margin: 0 0.2rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.aviones-table button:first-child {
+  background: #27ae60; /* editar */
+  color: white;
+}
+
+.aviones-table button:first-child:hover {
+  background: #219150;
+}
+
+.aviones-table button:last-child {
+  background: #e74c3c; /* baja */
+  color: white;
+}
+
+.aviones-table button:last-child:hover {
+  background: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .aviones-form,
+  .aviones-edit-form {
+    flex-direction: column;
+  }
+
+  .aviones-table,
+  .aviones-table thead,
+  .aviones-table tbody,
+  .aviones-table th,
+  .aviones-table td,
+  .aviones-table tr {
+    display: block;
+  }
+
+  .aviones-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem;
+  }
+
+  .aviones-table td {
+    border: none;
+    text-align: left;
+    padding: 0.5rem;
+  }
+
+  .aviones-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .aviones-table th {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .aviones-container h2 {
+    font-size: 1.2rem;
+  }
+
+  .aviones-form button,
+  .aviones-edit-form button,
+  .aviones-table button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}

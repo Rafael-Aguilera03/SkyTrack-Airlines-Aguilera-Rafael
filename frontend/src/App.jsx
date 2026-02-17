@@ -19,13 +19,17 @@ function App() {
 
         {user ? (
           <Route element={<Layout />}>
-            <Route path="/inicio" element={<InicioPage />} />
-            <Route path="/vuelos" element={<VuelosPage />} />
-            <Route path="/tripulacion" element={<TripulacionPage />} />
-            <Route path="/aviones" element={<AvionesPage />} />
-            {user.role === "admin" && (
-              <Route path="/usuarios" element={<UsuariosPage />} />
+            <Route path="/inicio" element={<InicioPage role={user.role} />} />
+            <Route path="/vuelos" element={<VuelosPage role={user.role} />} />
+            <Route path="/tripulacion" element={<TripulacionPage role={user.role} />} />
+            <Route path="/aviones" element={<AvionesPage role={user.role} />} />
+            
+            {/* Solo admin puede acceder a Usuarios */}
+            {user.role?.toLowerCase() === "admin" && (
+              <Route path="/usuarios" element={<UsuariosPage role={user.role} />} />
             )}
+
+            {/* Redirección por defecto */}
             <Route path="*" element={<Navigate to="/inicio" />} />
           </Route>
         ) : (
