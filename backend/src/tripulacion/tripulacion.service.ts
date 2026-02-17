@@ -13,7 +13,7 @@ export class TripulacionService {
     @InjectModel(Vuelo.name) private readonly vueloModel: Model<VueloDocument>,
   ) {}
 
-  // Crear tripulante
+  // Crear tripulante (admin)
   async create(dto: CreateTripulacionDto): Promise<Tripulacion> {
     const created = new this.tripModel(dto);
     return created.save();
@@ -29,7 +29,7 @@ export class TripulacionService {
     return this.tripModel.findById(id).exec();
   }
 
-  // Actualizar tripulante
+  // Actualizar tripulante (admin)
   async update(id: string, dto: UpdateTripulacionDto): Promise<Tripulacion | null> {
     return this.tripModel.findByIdAndUpdate(
       id,
@@ -47,21 +47,41 @@ export class TripulacionService {
     ).exec();
   }
 
-  // Asignar tripulante a un vuelo (rol operador)
+  // Asignar tripulante a un vuelo (operador)
   async assignToVuelo(vueloId: string, tripulanteId: string): Promise<Vuelo | null> {
-    return this.vueloModel.findByIdAndUpdate(
-      vueloId,
-      { $addToSet: { tripulacion: new Types.ObjectId(tripulanteId) } },
-      { returnDocument: 'after' }
-    ).populate('tripulacion').exec();
+    const vuelo = await this.vueloModel.findById(vueloId).populate('tripulacion').exec();
+    if (!vuelo) return null;
+
+    const tripulante = await this.tripModel.findById(tripulanteId).exec();
+    if (!tripulante) return null;
+
+    // Validar que no haya otro tripulante con el mismo rol en el vuelo
+    const rolDuplicado = vuelo.tripulacion.some(
+      (t: any) => t.rol === tripulante.rol
+    );
+    if (rolDuplicado) {
+      throw new Error(`Ya existe un ${tripulante.rol} asignado a este vuelo`);
+    }
+
+    vuelo.tripulacion.push(tripulante._id);
+    await vuelo.save();
+
+    return this.vueloModel.findById(vueloId)
+      .populate('tripulacion')
+      .populate('avion')
+      .exec();
   }
 
-  // Quitar tripulante de un vuelo (rol operador)
+  // Quitar tripulante de un vuelo (operador)
   async removeFromVuelo(vueloId: string, tripulanteId: string): Promise<Vuelo | null> {
-    return this.vueloModel.findByIdAndUpdate(
+    await this.vueloModel.findByIdAndUpdate(
       vueloId,
-      { $pull: { tripulacion: new Types.ObjectId(tripulanteId) } },
-      { returnDocument: 'after' }
-    ).populate('tripulacion').exec();
+      { $pull: { tripulacion: new Types.ObjectId(tripulanteId) } }
+    ).exec();
+
+    return this.vueloModel.findById(vueloId)
+      .populate('tripulacion')
+      .populate('avion')
+      .exec();
   }
 }

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nes
 import { TripulacionService } from './tripulacion.service';
 import { CreateTripulacionDto } from './dto/create-tripulacion.dto';
 import { UpdateTripulacionDto } from './dto/update-tripulacion.dto';
+import { AssignTripulacionDto } from './dto/assign-tripulacion.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -10,7 +11,7 @@ import { Roles } from '../auth/decorators/roles.decorator';
 export class TripulacionController {
   constructor(private readonly tripService: TripulacionService) {}
 
-  // CRUD (solo admin)
+  // --- CRUD (solo admin) ---
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @Post()
@@ -44,18 +45,18 @@ export class TripulacionController {
     return this.tripService.remove(id);
   }
 
-  // Asignación a vuelos (solo operador)
+  // --- Asignación a vuelos (admin y operador) ---
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('operador')
+  @Roles('admin', 'operador')
   @Post('asignar')
-  assignToVuelo(@Body() body: { vueloId: string; tripulanteId: string }) {
-    return this.tripService.assignToVuelo(body.vueloId, body.tripulanteId);
+  assignToVuelo(@Body() dto: AssignTripulacionDto) {
+    return this.tripService.assignToVuelo(dto.vueloId, dto.tripulanteId);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('operador')
+  @Roles('admin', 'operador')
   @Post('remover')
-  removeFromVuelo(@Body() body: { vueloId: string; tripulanteId: string }) {
-    return this.tripService.removeFromVuelo(body.vueloId, body.tripulanteId);
+  removeFromVuelo(@Body() dto: AssignTripulacionDto) {
+    return this.tripService.removeFromVuelo(dto.vueloId, dto.tripulanteId);
   }
 }

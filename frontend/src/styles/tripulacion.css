@@ -1,0 +1,233 @@
+.tripulacion-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.tripulacion-container h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* Formulario */
+.tripulacion-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tripulacion-form input,
+.tripulacion-form select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.tripulacion-form button {
+  padding: 0.6rem 1rem;
+  background: #27ae60;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tripulacion-form button:hover {
+  background: #219150;
+}
+
+/* Botón cancelar */
+.tripulacion-form .btn-cancel {
+  background: #7f8c8d;
+}
+
+.tripulacion-form .btn-cancel:hover {
+  background: #606060;
+}
+
+/* Tabla de tripulación */
+.tripulacion-table {
+  margin-top: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tripulacion-table th,
+.tripulacion-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.tripulacion-table th {
+  background: #2c3e50;
+  color: white;
+}
+
+.tripulacion-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Botones de acciones */
+.btn-edit,
+.btn-delete {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 6px;
+  transition: background 0.2s ease;
+}
+
+.btn-edit {
+  background: #3498db;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #2980b9;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+/* Tabla de asignación de vuelos */
+.vuelos-table {
+  margin-top: 2rem;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.vuelos-table th,
+.vuelos-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.vuelos-table th {
+  background: #2c3e50;
+  color: white;
+}
+
+.vuelos-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.asignacion-title {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.asignacion-title.espaciado {
+  margin-top: 2.5rem; /* solo para operador */
+}
+
+
+/* Chips de tripulantes */
+.trip-item {
+  display: inline-block;
+  margin: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: #ecf6ff;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Botón quitar tripulante */
+.btn-remove {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.btn-remove:hover {
+  background: #c0392b;
+}
+
+/* Selector de asignación */
+.vuelos-table select {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Responsive: tablas en formato cards */
+@media (max-width: 768px) {
+  .tripulacion-table,
+  .tripulacion-table thead,
+  .tripulacion-table tbody,
+  .tripulacion-table th,
+  .tripulacion-table td,
+  .tripulacion-table tr,
+  .vuelos-table,
+  .vuelos-table thead,
+  .vuelos-table tbody,
+  .vuelos-table th,
+  .vuelos-table td,
+  .vuelos-table tr {
+    display: block;
+  }
+
+  .tripulacion-table tr,
+  .vuelos-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem;
+    background: white;
+  }
+
+  .tripulacion-table td,
+  .vuelos-table td {
+    border: none;
+    text-align: left;
+    padding: 0.5rem;
+  }
+
+  .tripulacion-table td::before,
+  .vuelos-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .tripulacion-table th,
+  .vuelos-table th {
+    display: none;
+  }
+
+  .btn-remove,
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+}

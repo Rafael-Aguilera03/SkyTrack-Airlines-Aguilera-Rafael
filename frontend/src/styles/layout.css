@@ -1,6 +1,7 @@
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;        /* ocupa toda la altura de la ventana */
+  overflow: hidden;     /* evita scroll en el contenedor general */
 }
 
 /* Área principal a la derecha de la barra */
@@ -8,26 +9,28 @@
   flex: 1;
   display: flex;              /* convierte el área en contenedor flex */
   justify-content: center;    /* centra horizontalmente */
-  align-items: flex-start;    /* alinea arriba para que no tape la barra inferior */
+  align-items: flex-start;    /* alinea arriba */
   background: #f9f9f9;        /* fondo claro */
   padding: 2rem;
   box-sizing: border-box;
-  overflow-y: auto;           /* permite scroll si el contenido es largo */
+  overflow-y: auto;           /* solo esta parte se scrollea */
 }
 
 /* Responsive: sidebar arriba en pantallas pequeñas */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
+    height: auto;             /* en móvil no forzamos altura completa */
   }
 
   .layout-content {
     padding: 1rem;
     align-items: stretch;     /* ocupa todo el ancho en móvil */
+    overflow-y: visible;      /* en móvil dejamos que el scroll sea natural */
   }
 }
 
-/* Ajuste para dejar espacio a la barra inferior fija */
+/* Ajuste para dejar espacio a la barra inferior fija en móvil */
 @media (max-width: 768px) {
   .layout-content {
     padding-bottom: 4rem;     /* espacio extra para que no se tape */
