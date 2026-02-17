@@ -19,13 +19,13 @@ export class Vuelo {
   })
   estado: string;
 
+
   @Prop({ type: Types.ObjectId, ref: Avion.name, required: true })
-  avion: Avion;
+  avion: Types.ObjectId;
 
   @Prop({ default: true })
-  activo: boolean; // Para baja lógica (soft delete)
+  activo: boolean;
 
-  // Relación con tripulación
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Tripulacion' }] })
   tripulacion: Types.ObjectId[];
 }

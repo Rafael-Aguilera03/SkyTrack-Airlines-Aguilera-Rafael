@@ -40,8 +40,7 @@ export default function VuelosPage() {
     };
     fetchData();
   }, [user]);
-
-  const handleFormChange = (e) => {
+    const handleFormChange = (e) => {
     setVueloForm({ ...vueloForm, [e.target.name]: e.target.value });
   };
 
@@ -67,7 +66,7 @@ export default function VuelosPage() {
       origen: vuelo.origen,
       destino: vuelo.destino,
       estado: vuelo.estado,
-      avion: vuelo.avion?._id || ""
+      avion: vuelo.avion?._id || vuelo.avion || "" // <-- ajuste aquí
     });
   };
 
@@ -91,9 +90,8 @@ export default function VuelosPage() {
   const handleDelete = async (id) => {
     if (!window.confirm("¿Seguro que quieres dar de baja lógica este vuelo?")) return;
     try {
-      await axios.patch(
-        `http://localhost:3000/vuelos/${id}/baja`,
-        {},
+      await axios.delete(
+        `http://localhost:3000/vuelos/${id}`,
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       setVuelos(vuelos.filter((v) => v._id !== id));
@@ -112,10 +110,8 @@ export default function VuelosPage() {
       setError(err.response?.data?.message || "Error al actualizar estado");
     }
   };
+    if (loading) return <p>Cargando vuelos...</p>;
 
-  if (loading) return <p>Cargando vuelos...</p>;
-
-  // Filtrado de vuelos activos
   const vuelosFiltrados = vuelos.filter((vuelo) => {
     const coincideOrigen = filtroOrigen
       ? vuelo.origen.toLowerCase().includes(filtroOrigen.toLowerCase())
@@ -126,6 +122,7 @@ export default function VuelosPage() {
     const coincideEstado = filtroEstado ? vuelo.estado === filtroEstado : true;
     return coincideOrigen && coincideDestino && coincideEstado && vuelo.activo !== false;
   });
+
   return (
     <div className="vuelos-container">
       <h2>Panel de Vuelos</h2>
@@ -158,6 +155,7 @@ export default function VuelosPage() {
         </select>
       </div>
 
+      {/* Formulario */}
       {user.role === "admin" && (
         <form
           className="vuelos-form"
@@ -197,11 +195,13 @@ export default function VuelosPage() {
             required
           >
             <option value="">Seleccionar avión</option>
-            {aviones.map((a) => (
-              <option key={a._id} value={a._id}>
-                {a.modelo}
-              </option>
-            ))}
+            {aviones
+              .filter((a) => a.estado === "disponible") // <-- solo aviones disponibles
+              .map((a) => (
+                <option key={a._id} value={a._id}>
+                  {a.modelo}
+                </option>
+              ))}
           </select>
           <button type="submit" className="btn-edit">
             {editando ? "Guardar cambios" : "Crear vuelo"}
@@ -217,7 +217,7 @@ export default function VuelosPage() {
           )}
         </form>
       )}
-
+            {/* Tabla */}
       <table className="vuelos-table">
         <thead>
           <tr>
@@ -240,7 +240,9 @@ export default function VuelosPage() {
                 {vuelo.estado}
               </td>
               <td data-label="Avión">
-                {vuelo.avion ? vuelo.avion.modelo : "Sin asignar"}
+                {vuelo.avion && typeof vuelo.avion === "object"
+                  ? vuelo.avion.modelo
+                  : "Sin asignar"}
               </td>
               <td data-label="Acciones">
                 {user.role === "operador" && (

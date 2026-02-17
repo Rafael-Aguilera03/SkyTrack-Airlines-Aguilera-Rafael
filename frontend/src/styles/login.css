@@ -48,6 +48,35 @@
   margin-top: 0.5rem;
 }
 
+/* Campo de contraseña con ícono */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 0.6rem;
+  padding-right: 2.5rem; /* espacio para el ícono */
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #34495e;
+  font-size: 1.2rem;
+}
+
+.toggle-password:hover {
+  color: #2c3e50;
+}
+
 /* Responsive */
 @media (min-width: 768px) {
   .login-form {
