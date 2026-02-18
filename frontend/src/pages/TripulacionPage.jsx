@@ -198,7 +198,7 @@ export default function TripulacionPage() {
             Asignación de Tripulación a Vuelos
           </h2>
 
-          <table className="vuelos-table">
+          <table className="vuelos-table" aria-label="Asignación de Tripulación">
             <thead>
               <tr>
                 <th>Origen</th>
