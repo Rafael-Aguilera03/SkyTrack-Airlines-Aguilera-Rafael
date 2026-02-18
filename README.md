@@ -26,6 +26,24 @@ JWT (autenticación y roles)
 
 TypeScript
 
+- Frontend:
+
+React + Vite (framework)
+
+Axios (consumo de API REST)
+
+React Router (navegación y rutas protegidas)
+
+Context API (gestión de autenticación y roles)
+
+CSS (estilos y diseño responsivo)
+
+- Testing (Backend / Frontend)
+
+Jest (framework de testing para pruebas unitarias)
+
+Vitest + Testing Library (pruebas unitarias y E2E)
+
 # Backend: Instalación y ejecución #
 
 - Clonar repositorio
@@ -34,7 +52,7 @@ TypeScript
 
 - Instalar dependencias
 
-    cd skytrack-backend
+    cd backend
     npm install
 
 - Variables de entorno (.env)
@@ -71,9 +89,7 @@ Operador: Puede listar vuelos activos, asignar y quitar tripulación, cambiar es
 
     POST /aviones → Crear avión
 
-    PUT /aviones/:id → Editar datos
-
-    Estado
+    PUT /aviones/:id → Editar datos incluyendo estado del avión
 
 - Tripulación:
 
@@ -82,3 +98,60 @@ Operador: Puede listar vuelos activos, asignar y quitar tripulación, cambiar es
     PUT /tripulacion/:id → Editar datos
 
     PUT /vuelos/:id/tripulacion → Asignar/quitar tripulación
+
+# Frontend: Instalación y ejecución #
+
+- Instalar dependencias
+
+    cd frontend
+    npm install
+
+- Ejecutar servidor
+
+    npm run dev
+
+- se levanta en:
+
+    http://localhost:5173
+
+# Testing #
+
+El proyecto incluye dos tipos de pruebas:
+El backend utiliza Jest para validar la lógica de vuelos, mientras que el frontend usa Vitest para simular el flujo de login, listado y filtro
+
+- Backend (Unitarias):
+
+    Filtrado por estado: devuelve solo vuelos activos con el estado solicitado.
+
+    Filtrado por origen: devuelve solo vuelos activos con el origen solicitado.
+
+    Exclusión de vuelos dados de baja: asegura que no se incluyan vuelos con activo: false.
+
+
+- Frontend (E2E parcial):
+
+Se implementó hasta el paso 3 de las consignas para priorizar estabilidad, ya que el flujo completo requería más tiempo de depuración.
+
+    Login con credenciales simuladas.
+
+    Visualización del listado de vuelos.
+
+    Filtrado por estado (ejemplo: “programado”).
+
+# Ejecución de Tests #
+
+- Backend (Unitarias):
+
+    cd backend
+
+    npm install   # si aún no instalaste dependencias #
+
+    npm run test
+
+- Frontend (E2E):
+
+    cd frontend
+
+    npm install   # si aún no instalaste dependencias
+
+    npm run test
